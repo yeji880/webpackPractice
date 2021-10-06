@@ -1,0 +1,158 @@
+1. Entry : 최초 진입점, 자바스크립트 파일 경로, 여기 있는 파일들을 하나로 묶는다.
+2. Output : entry로 찾은 모듈을 번들링하여 반환할 위치
+3. Loader : 자바스크립트와 JSON이 아닌 파일들 (HTML, CSS, Image)을 빌드할 수 있도록 도와준다.
+            -> 번들링 과정에 관여
+4. Plugin : 웹팩의 기본동작 외 추가적인 기능을 제공. -> 결과물의 형태를 바꾼다.
+
+# Babel : es6를 es5로 변환해준다.
+root 위치에 .babelrc 파일을 만들고 
+{
+  "presets": ["@babel/preset-env", "@babel/preset-react"]
+}
+를 작성한다.
+
+// 프로젝트 설정
+npm init
+
+초기 설치하는 모듈들
+npm i -D 
+@babel/core @babel/preset-env 
+@babel/preset-react babel-loader 
+clean-webpack-plugin 
+css-loader 
+html-loader 
+html-webpack-plugin 
+mini-css-extract-plugin 
+node-sass 
+react 
+react-dom 
+sass-loader 
+style-loader 
+webpack 
+webpack-cli 
+webpack-dev-server
+-----------------------------------------------------------------------------------------
+//웹팩으로 자바스크립트 파일 빌드하기
+root 폴더에 webpack.config.js 파일을 생성하여 entry, output 등 설정.
+packgae.json의 scripts 속성에 "bundle" : "webpack" 속성을 추가한다.
+webpack.config.js에 적힌 내용을 기반으로 번들링하기 때문에 entry, output에 기재한 폴더나 경로가 없다면
+해당 경로에 폴더를 생성하거나 경로를 수정해야한다.
+확인했다면 npm run-script build 를 입력하자. 정상적으로 build 폴더가 생성되어 그 안에 번들링 된 파일이 보인다. 
+
+//웹팩으로 HTML 파일 빌드하기 (로더 사용)
+public 폴더를 생성해 html 파일을 만들고 webpack.config.js의 mode 다음에 html관련 코드를 추가한다.
+플러그인 호출은 상단에서 한다.
+const HtmlWebPackPlugin = require("html-webpack-plugin"); //플러그인 선언
+module : {
+	rules: { //각 모듈을 처리하는 방법을 설정
+		test: '가지고올 파일 정규식',
+		use: [
+			{
+				loader: '사용할 로더 이름',
+				options: { 사용할 로더 옵션 }
+			}
+		]
+	},
+    plugins: [
+        new HtmlWebPackPlugin({//html-webpack-plugin은 웹팩이 html 파일을 읽어서 html 파일을 빌드할 수 있게 해준다.
+            template: './public/index.html', // public/index.html 파일을 읽는다.
+            filename: 'index.html' // output으로 출력할 파일은 index.html 이다.
+        })
+      ]
+}
+
+//웹팩으로 리액트 빌드하기
+1. src 폴더에 index.js 생성
+import React from "react";
+import ReactDOM from "react-dom";
+import Root from "./Root";
+
+ReactDOM.render(<Root />, document.getElementById("root"));
+
+2. src 폴더에 Root.js 생성
+import React from "react";
+
+function Root () {
+    return (
+        <h3>Hello, React</h3>
+    );
+};
+
+export default Root;
+
+3. root폴더 (최상위 경로)에 .babelrc 파일을 생성 후 프리셋 설정
+{
+  "presets": ["@babel/preset-env", "@babel/preset-react"]
+}
+
+4. webpack config의 entry와 rules에 babel-loader 추가
+   module: {
+        rules: [
+          {
+            test: /\.(js|jsx)$/,
+            exclude: "/node_modules",
+            use: ['babel-loader'],
+          }, => 이부분
+          {
+            test: /\.html$/,
+            use: [
+              {
+                loader: "html-loader",
+                options: { minimize: true } //코드 최적화 옵션, 이 옵션이 켜져있으면 번들링 된 코드가 최적화 되어 한 줄로 보인다.
+              }
+            ]
+          }
+        ]
+      },
+
+4-1. webpack으로 빌드 하면서 개발 서버를 적용하고 싶으면 module exports에
+devServer 속성을 추가한다.
+module.exports = {
+  entry: "./src/index.js",
+  output: {
+    filename: "bundle.js",
+    path: path.resolve(__dirname + "/build")
+  },
+  devServer: { => 이거
+    contentBase: path.resolve("./build"),
+    index: "index.html",
+    port: 9000
+  },
+  mode: "none",
+
+  4-2. 그리고 package.json 으로 ㄷ르어가 scripts에 npm start 를 추가한다.
+  "scripts": {
+	"build": "webpack",
+	"start": "webpack-dev-server --hot"
+}
+
+5. 빌드 디렉토리 꺠끗하게 하기
+clean-webpack-plugin을 통해서 빌드될 떄마다 안쓰는 파일들을 삭제.
+
+상단에 플로그인 호출.
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+module.exports = {
+ 	...,
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: './public/index.html', // public/index.html 파일을 읽는다.
+      filename: 'index.html' // output으로 출력할 파일은 index.html 이다.
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'style-test.css'
+    }),
+    new CleanWebpackPlugin() => 이거
+  ]
+};
+
+6. 웹팩 빌드 모드 나누기
+webpack.config.dev.js
+webpack.config.prod.js
+
+파일을 각각 만들고 mode를 developement, production으로 나눈다.
+
+그리고 package.json 의 scripts를 아래와 같이 수정한다.
+"scripts": {
+  "start": "webpack-dev-server --config ./config/webpack.config.dev --hot",
+  "build": "webpack --config ./config/webpack.config.prod"
+ },

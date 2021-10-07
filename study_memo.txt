@@ -177,4 +177,8 @@ webpack-dev-server는 output.path에 정의된 디렉터리에서 번들된 파�
 예를 들면, 파일은 http://[devServer.host]:[devServer.port]/[output.publicPath]/[output.filename]
 주소로 사용할 수 있습니다.
 
-3. webpack-dev-middleware -
+3. webpack-dev-middleware - 웹팩에서 처리한 파일을 서버로 내보내는 래퍼.
+내부적으로 webpack-dev-server 에서 사용되지만, 사용자가 원하는 경우 더 많은 설정을 허용하기 위해
+별도의 패키지로 사용할 수 있다.
+예) express와 webpack-dev-middleware의 조합.
+npm install --save-dev express webpack-dev-middleware

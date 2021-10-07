@@ -5,7 +5,7 @@ module.exports = {
     //entry 지점 두곳으로 설정
     entry: {
         index: './src/index.js',
-        print: './src/print.js',
+        anoter: './src/another-module.js',
     },
     //번들 파일과 소스코드를 매핑하여 소스코드 중 에러가 발생한 파일, 줄 번호를 알려준다.
     devtool: 'inline-source-map',

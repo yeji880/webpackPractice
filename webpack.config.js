@@ -4,8 +4,25 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     //entry 지점 두곳으로 설정
     entry: {
-        index: './src/index.js',
-        anoter: './src/another-module.js',
+        /*
+        dependOn 속성과 shared 속성으로 두 청크 사이에 모듈을 공유
+        단일 HTML 페이지에서 여러 엔트리 포인트를 사용하는 경우 optimization.runtimeChunk: 'single'
+        도 필요합니다. 이 속성을 주지 않을 경우 문제(https://bundlers.tooling.report/)가 발생할 수 있습니다.
+        
+        webpack은 하나의 페이지에 여러 엔트리 포인트를 허용하지만, 가능하다면 
+        entry: { page: ['./analytics', './app'] }처럼 여러 개의 import가 
+        포함된 엔트리 포인트 사용을 피해야 합니다. 이는 async 스크립트 태그를 사용할 때 최적화에 용이하며 일관된 
+        순서로 실행할 수 있도록 합니다.
+        */
+        index: {
+            import: './src/index.js',
+            dependOn: 'shared',
+        },
+        another: {
+            import: './src/another-module.js',
+            dependOn: 'shared',
+        },
+        shared: 'lodash',
     },
     //번들 파일과 소스코드를 매핑하여 소스코드 중 에러가 발생한 파일, 줄 번호를 알려준다.
     devtool: 'inline-source-map',
@@ -26,4 +43,7 @@ module.exports = {
         publicPath: '/',
     },
     mode: 'development',
+    optimization: {
+        runtimeChunk: 'single',
+    }
 };

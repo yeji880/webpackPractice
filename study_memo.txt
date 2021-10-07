@@ -194,5 +194,9 @@ npm install --save-dev express webpack-dev-middleware
 - 엔트리 청크 사이에 중복된 모듈이 있으면 그 모듈이 두 번들 모두에 포함됩니다.
 - 코어 애플리케이션 로직을 통한 코드의 동적 분할에는 사용 못하고 유연하지 않다.
 
-2. Prevent Duplication: Entry dependencies 또는 SplitChunksPlugin을 사용하여 중복 청크를 제거하고 청크를 분할합니다.
+2. Prevent Duplication: Entry dependencies 또는 SplitChunksPlugin을 사용하여 
+중복 청크를 제거하고 청크를 분할합니다.
+- dependOn 옵션을 사용하면 청크끼리 모듈을 공유할 수 있습니다.
+- 빌드 시 추가적으로 runtie.bundle.js 파일이 생성된다.
+
 3. Dynamic Imports: 모듈 내에서 인라인 함수 호출을 통해 코드를 분할합니다.

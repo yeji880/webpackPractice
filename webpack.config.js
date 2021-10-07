@@ -17,6 +17,7 @@ module.exports = {
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist'),
+        clean: true, //실제로 사용되는 파일만 빌드폴더에 생성되도록 빌드전에 dist 폴더를 정리해주는 옵션
     },
     mode: 'development',
 };

@@ -22,8 +22,7 @@ console.log(lodash__WEBPACK_IMPORTED_MODULE_0___default().join(['Another', 'modu
 },
 /******/ __webpack_require__ => { // webpackRuntimeModules
 /******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-/******/ __webpack_require__.O(0, ["shared"], () => (__webpack_exec__("./src/another-module.js")));
-/******/ var __webpack_exports__ = __webpack_require__.O();
+/******/ var __webpack_exports__ = (__webpack_exec__("./src/another-module.js"));
 /******/ }
 ]);
 //# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYW5vdGhlci5idW5kbGUuanMiLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7O0FBQXVCO0FBQ3ZCO0FBQ0E7QUFDQTtBQUNBLFlBQVksa0RBQU0iLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly93ZWJwYWNrX3ByYWN0aWNlLy4vc3JjL2Fub3RoZXItbW9kdWxlLmpzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBfIGZyb20gJ2xvZGFzaCc7XG4vL2luZGV4Lmpz7JeQ7ISc64+EIGxvZGFzaCDrqqjrk4jsnYQg6rCA7KC47Jik6rOgIOyeiOuLpC5cbi8v7J20IOuyiOuTpOyXkOyEnOuPhCBsb2Rhc2gg66qo65OI7J2EIOqwgOyguOyYpOqzoC4uLiBlbnRyeeuhnCDsvZTrk5wg7Iqk7ZSM66as7YyFIOygkeq3vOydhCDtlZjrqbRcbi8v7J2066CH6rKMIOykkeuzteuQmOuKlCDrqqjrk4jsnYQg7JaR7Kq9IOuyiOuTpOyXkOyEnCDrqqjrkZAg7Y+s7ZWo7ZWY6rKMIOuQmOuKlCDrrLjsoJzqsIAg67Cc7IOd7ZWc64ukLlxuY29uc29sZS5sb2coXy5qb2luKFsnQW5vdGhlcicsICdtb2R1bGUnLCAnbG9hZGVkISddLCAnICcpKTtcbiJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==

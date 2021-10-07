@@ -209,4 +209,7 @@ webpack.config.js에 optimization: {
 속성 추가.
 * mini-css-extract-plugin : 메인 애플리케이션에서 CSS를 분리하는데 유용합니다.
 
-3. Dynamic Imports: 모듈 내에서 인라인 함수 호출을 통해 코드를 분할합니다.
+3. Dynamic Imports(동적 코드 스플리팅): 모듈 내에서 인라인 함수 호출을 통해 코드를 분할합니다.
+1) ECMAScript 제안을 준수하는 import() 구문을 사용하는 방식 : 내부적으로 promises를 사용하여 이전 브라우저에서 이 방식을 사용하는 경우
+es6-promise나 promise-polyfill과 같은 폴리필을 사용하여 Promise를 지원하도록 해야 한다.
+2) 기존 웹팩 전용 방식인 require.ensure를 사용하는 방식

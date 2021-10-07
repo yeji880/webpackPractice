@@ -14,15 +14,7 @@ module.exports = {
         포함된 엔트리 포인트 사용을 피해야 합니다. 이는 async 스크립트 태그를 사용할 때 최적화에 용이하며 일관된 
         순서로 실행할 수 있도록 합니다.
         */
-        index: {
-            import: './src/index.js',
-            dependOn: 'shared',
-        },
-        another: {
-            import: './src/another-module.js',
-            dependOn: 'shared',
-        },
-        shared: 'lodash',
+        index: './src/index.js',
     },
     //번들 파일과 소스코드를 매핑하여 소스코드 중 에러가 발생한 파일, 줄 번호를 알려준다.
     devtool: 'inline-source-map',
@@ -39,13 +31,6 @@ module.exports = {
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist'),
-        clean: true, //실제로 사용되는 파일만 빌드폴더에 생성되도록 빌드전에 dist 폴더를 정리해주는 옵션
-        publicPath: '/',
     },
     mode: 'development',
-    optimization: {
-        splitChunks: {
-            chunks: 'all',
-        }
-    }
 };

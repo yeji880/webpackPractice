@@ -156,3 +156,7 @@ webpack.config.prod.js
   "start": "webpack-dev-server --config ./config/webpack.config.dev --hot",
   "build": "webpack --config ./config/webpack.config.prod"
  },
+
+-------------------------------------------------------------------------------
+* webpack 로더들 대신 [커스텀 파서](/configuration/modules#ruleparserparse)를 사용하여 toml,
+yaml 또는 json5 파일을 JSON 모듈로 가져올 수 있습니다.

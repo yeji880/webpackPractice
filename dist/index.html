@@ -1,14 +1,9 @@
-<!--dist 폴더는 배포 코드를 둔다. 배포 코드는 빌드 과정을 통해 최소화 하고 최적화되어 
-궁극적으로 브라우저에 로드될 출력물.
--->
 <!DOCTYPE html>
-<head>
-    <meta charset="UTF-8">
+<html>
+  <head>
+    <meta charset="utf-8">
     <title>Output Management</title>
-    <!--entry 파일 분할 되도록 두가지 파일로 나눠서 선언, webpack config 파일도 수정-->
-    <script src="./print.bundle.js"></script>
-</head>
-<body>
-    <script src="./index.bundle.js"></script>
-</body>
+  <meta name="viewport" content="width=device-width, initial-scale=1"><script defer src="index.bundle.js"></script><script defer src="print.bundle.js"></script></head>
+  <body>
+  </body>
 </html>

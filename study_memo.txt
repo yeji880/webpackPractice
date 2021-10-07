@@ -164,3 +164,17 @@ yaml 또는 json5 파일을 JSON 모듈로 가져올 수 있습니다.
 * 매니페스트 : 컴파일러가 애플리케이션에 입력, 해석 및 매핑 할 때 모든 모듈에 대한 자세한 메모를 유지. 
 이 데이터 모음을 매니페스트라고 합니다. 모듈이 번들링 되고 브라우저에 제공되면 런타임에서 모듈을 해석하고 로드하는데 사용.
 이 매니페스트 데이터는 webpackManifestPlugin을 사용하여 쉽게 적용 가능한 json 파일로 추출할 수 있습니다.
+-------------------------------------------------------------------------------
+매번 npm run build 를 하기 귀찮으면 코드가 변경될 때마다 자동으로 컴파일 하는 데 도움이 되는 몇가지 옵션이 있다.
+
+1. webpack의 watch 모드 - 웹팩이 디펜던시 그래프 내의 모든 파일에서의 변경사항을 '감시'
+파일들 중 하나가 업데이트 되면 코드가 다시 컴파일 되어 전체 빌드를 수동으로 수행할 필요가 없다.
+package.json의 scripts 에 "watch" : "webpack --watch", 추가
+
+2. webpack-dev-server - 간단한 웹 서버와 실시간 재로딩 기능을 제공합니다.
+* localhost:8080에서 output 디렉토리에 있는 파일을 실행합니다.
+webpack-dev-server는 output.path에 정의된 디렉터리에서 번들된 파일을 제공합니다. 
+예를 들면, 파일은 http://[devServer.host]:[devServer.port]/[output.publicPath]/[output.filename]
+주소로 사용할 수 있습니다.
+
+3. webpack-dev-middleware -

@@ -9,6 +9,9 @@ module.exports = {
     },
     //번들 파일과 소스코드를 매핑하여 소스코드 중 에러가 발생한 파일, 줄 번호를 알려준다.
     devtool: 'inline-source-map',
+    devServer: {
+        static: `./dist`,
+    },
     plugins: [
         //dist 폴더에 이미 index.html 파일이 있어도 html-webpack-plugin은 새로
         //index.html 파일을 생성하고 기존 파일은 이 새로 생성된 파일로 대체된다.

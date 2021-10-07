@@ -1,9 +1,13 @@
 const path = require('path');
 
 module.exports = {
-    entry: './src/index.js',
+    //entry 지점 두곳으로 설정
+    entry: {
+        index: './src/index.js',
+        print: './src/print.js',
+    },
     output: {
-        filename: 'bundle.js',
+        filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist'),
     },
     mode: 'development',
